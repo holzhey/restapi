@@ -1,0 +1,32 @@
+version: '3'
+services:
+  php:
+    build: docker/build/php
+    expose:
+      - "9000"
+    depends_on:
+      - db
+    volumes:
+      - ./:/var/www/html:cached
+      - ./docker/logs:/var/log
+  web:
+    build: docker/build/nginx
+    restart: always
+    ports:
+        - "81:80"
+    depends_on:
+        - php
+        - db
+    volumes:
+        - ./:/var/www/html:cached
+        - ./docker/logs:/var/log/nginx
+  db:
+    image: mysql/mysql-server:latest
+    environment:
+      - MYSQL_DATABASE="api"
+      - MYSQL_ROOT_PASSWORD="12345"
+      - MYSQL_ROOT_HOST="php"
+    ports:
+      - "3307:3307"
+    volumes:
+      - ./docker/db:/var/lib/mysql

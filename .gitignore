@@ -7,8 +7,8 @@
 /vendor/
 ###< symfony/framework-bundle ###
 
-.idea
+.idea/*
 symfony.lock
 
-/docker/db
-/docker/logs
+/docker/db/*
+/docker/logs/*

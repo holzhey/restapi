@@ -9,4 +9,5 @@
 
 .idea/*
 symfony.lock
-
+/docker/db/*
+docker/logs/*
